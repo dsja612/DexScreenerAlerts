@@ -14,21 +14,21 @@ def telegram_bot_sendtext(bot_message):
     return response.json()
 
 def dexreport():
-    page = requests.get("https://api.dexscreener.io/latest/dex/pairs/cronos/0xc924da29d37f3b8c62c4c3e4e6958bf2b5ebf677")
+    page = requests.get("https://api.dexscreener.io/latest/dex/pairs/cronos/0xc924da29d37f3b8c62c4c3e4e6958bf2b5ebf677", verify=False)
     parsed = json.loads(page.content)
     data = parsed["pair"]["priceUsd"]
-    my_message = "Current price of MSHARE/MMF is: ${} USD".format(data)
+    my_message = "MSHARE/MMF: ${} USD".format(data)
     return my_message
 
 def coingeckoreport(coin, name):
     page = requests.get("https://api.coingecko.com/api/v3/simple/price?ids={}&vs_currencies=usd".format(coin))
     parsed = json.loads(page.content)
     data = parsed[coin]["usd"]
-    my_message = "Current price of {} is: ${} USD".format(name, data)
+    my_message = "{}: ${} USD".format(name, data)
     return my_message
    
 ## schedule.every().day.at("12:00").do(report)
-messageList = [];
+messageList = ["Current Prices Of:"];
 messageList.append(dexreport())
 messageList.append(coingeckoreport("bitcoin", "Bitcoin"))
 messageList.append(coingeckoreport("crypto-com-chain", "Cronos"))
