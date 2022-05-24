@@ -14,8 +14,9 @@ def telegram_bot_sendtext(bot_message):
 def dexreport(link, name):
     page = requests.get("https://api.dexscreener.io/latest/dex/pairs/{}".format(link), verify=False)
     parsed = json.loads(page.content)
-    data = parsed["pair"]["priceUsd"]
-    my_message = "{}: ${} USD".format(name, data)
+    price = parsed["pair"]["priceUsd"]
+    change = parsed["pair"]["priceChange"]["h6"]
+    my_message = "{}: ${} USD ({}% in 24H)".format(name, price, change)
     return my_message
 
 # def coingeckoreport(coin, name):
@@ -29,6 +30,7 @@ def executeBot():
     messageList = ["Cronos Dex Pairs:"];
     messageList.append(dexreport("cronos/0xc924da29d37f3b8c62c4c3e4e6958bf2b5ebf677", "MSHARE/MMF"))
     messageList.append(dexreport("cronos/0x0fcffa1ed6b91b50dc80bb652f1111464a46338f", "HKN/SVN"))
+    messageList.append(dexreport("cronos/0xaa0845ee17e4f1d4f3a8c22cb1e8102bacf56a77", "SKY/CRO"))
     messageList.append(" ")
     messageList.append("Crypto: (in USD)")
     messageList.append(dexreport("ethereum/0x99ac8ca7087fa4a2a1fb6357269965a2014abc35", "WBTC"))
