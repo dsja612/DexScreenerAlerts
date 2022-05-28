@@ -4,3 +4,5 @@ A script that gets data of defi crypto pairs on dexscreener, and sends it to a t
 Script is regularly run on AWS Lambda, scheduled through EventBridge (Cloudwatch Events).
 
 Data is sent every 30 minutes to https://t.me/MAANGBagholders.
+
+Powered by https://docs.dexscreener.com/.
