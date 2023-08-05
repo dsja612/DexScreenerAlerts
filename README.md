@@ -1,4 +1,4 @@
-# DexScreenerBot
+# DexScreener Alerts
 A script that gets data of defi crypto pairs from dexscreener, and sends it to a telegram channel.
 
 ### Sample pair.txt file:
